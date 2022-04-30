@@ -1,0 +1,36 @@
+<ion-content class="no-scroll">
+  <ion-button (click)="goToHomepage()" color="primary">
+    hollo
+  </ion-button>
+    <ion-list>
+      <div class="header-items">
+
+          <!-- <ion-icon name="hourglass-outline" color="light"></ion-icon> -->
+          <ion-chip
+          color="light"
+          outline="true"
+        >
+        <ion-icon name="hourglass-outline" color="light"></ion-icon>
+        <div class="label">Süre</div>
+        </ion-chip>
+          <!-- <div class="label">Süre</div> -->
+        </div>
+
+
+      <ion-item>
+
+        <ion-range [(ngModel)]="outputSeconds" (ionChange)="sendTime()" color="light" min="30" max="180" step="15" [pin]="true" ></ion-range>
+      </ion-item>
+      <ion-item>
+        <div class="header-items">
+        <ion-icon name="people-outline" color="light"></ion-icon>
+        <div class="label">Takım Sayısı</div>
+      </div>
+      </ion-item>
+      <ion-item>
+
+        <ion-range color="light" dualKnobs="true" min="2" max="4" step="1" [pin]="true" snaps="true"></ion-range>
+      </ion-item>
+    </ion-list>
+
+</ion-content>

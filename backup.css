@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
+
+ion-content{
+  --ion-background-color:#011627;
+  --ion-width: 100%;
+  --ion-height: 100%;
+  --ion-font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.card-left, .card-right, .card-main{
+  border-top: 25px solid #35A7FF;
+  border-bottom: 25px solid #35A7FF;
+  background-color: #FFFFFF;
+  width: 63vw;
+  height: 50vh;
+}
+
+ion-card {
+  border-radius: 25px;
+
+  --ion-background-color: #FFFFFF;
+  width: 63vw;
+  height: 50vh;
+}
+
+
+ion-label {
+  text-align: center;
+}
+
+ion-item {
+  margin-left: -5vw;
+}
+
+ion-card-content{
+  margin-top: 2vh;
+}
+
+ion-card-title {
+  font-weight: bold;
+  margin-top: 3vh;
+}
+
+.card-main {
+
+  margin-top: 15vh;
+  margin-left: 18vw;
+}
+
+.card-left {
+
+  margin-top: 15vh;
+  margin-left: -55vw;
+}
+
+.card-right {
+
+  margin-top: 15vh;
+  margin-left: 92vw;
+}
+
+.cards {
+  position: absolute;
+  text-align: center;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+}
+
+
+.btn-false, .btn-true, .btn-pass {
+  font-weight: bold;
+  --border-radius: 10px!important;
+  height: 6vh!important;
+  width: 25vw!important;
+}
+
+.btn-false {
+  margin-bottom: 15vh;
+  margin-left: 4.5vw;
+}
+
+.btn-true {
+  margin-bottom: 15vh;
+  margin-left: 3vw;
+}
+
+.btn-pass {
+  margin-bottom: 15vh;
+  margin-left: 3vw;
+}

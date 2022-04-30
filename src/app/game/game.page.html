@@ -1,0 +1,110 @@
+<ion-header> </ion-header>
+
+<ion-content class="no-scroll" id="content">
+  <div class="cards">
+    <ion-card class="card-third">
+      <ion-card-header>
+        <ion-card-title style="text-align: center">
+          {{ third.word }}
+        </ion-card-title>
+      </ion-card-header>
+      <div class="forbidden">
+        <ion-chip
+          color="dark"
+          outline="true"
+          *ngFor="let word of third.forbiddens"
+        >
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-label>{{ word }}</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card>
+
+    <ion-card class="card-second">
+      <ion-card-header>
+        <ion-card-title style="text-align: center">
+          {{ second.word }}
+        </ion-card-title>
+      </ion-card-header>
+      <div class="forbidden">
+        <ion-chip
+          color="dark"
+          outline="true"
+          *ngFor="let word of second.forbiddens"
+        >
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-label>{{ word }}</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card>
+
+    <ion-card class="card-first">
+      <ion-card-header>
+        <ion-card-title style="text-align: center">
+          {{ first.word }}
+        </ion-card-title>
+      </ion-card-header>
+      <div class="forbidden">
+        <ion-chip
+          color="dark"
+          outline="true"
+          *ngFor="let word of first.forbiddens"
+        >
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-label>{{ word }}</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card>
+
+    <ion-icon
+      (click)="pauseTimer()"
+      name="pause-circle-outline"
+      color="light"
+      class="icon-stop"
+      id="trigger-button"
+    ></ion-icon>
+    <ion-icon
+      name="stopwatch-outline"
+      color="light"
+      class="icon-timer"
+    ></ion-icon>
+    <div class="timer">{{ remaining }}</div>
+  </div>
+
+  <!-- <ion-icon name="stop-circle-outline" color="light" class="btn-stop"></ion-icon> -->
+  <!-- <ion-button outline="true" color="primary" class="btn-stop">Duraklat</ion-button> -->
+
+  <div class="buttons">
+    <ion-button (click)="clickFalse()" color="danger" class="btn-false"
+      >Tabu</ion-button
+    >
+    <ion-button (click)="clickTrue()" color="success" class="btn-true"
+      >Doğru</ion-button
+    >
+    <ion-button (click)="clickPass()" color="warning" class="btn-pass"
+      >Pas</ion-button
+    >
+  </div>
+
+  <!-- <ion-button id="trigger-button" (click)="blur()">Click to open modal</ion-button> -->
+
+
+
+
+
+
+
+
+</ion-content>
+<ion-modal  trigger="trigger-button" id="modal">
+  <ng-template>
+    <ion-content class="no-scroll bg-black">
+      <div class="modal-content-1">
+        <div class="continue-modal">
+          <ion-icon onclick="dismissModal()" (click)="continue()" id="trigger-button" name="play-circle-outline" color="light" class="continue"></ion-icon>
+          Devam
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
