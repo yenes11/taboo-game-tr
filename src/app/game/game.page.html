@@ -86,23 +86,23 @@
     >
   </div>
 
-  <!-- <ion-button id="trigger-button" (click)="blur()">Click to open modal</ion-button> -->
-
-
-
-
-
-
-
-
 </ion-content>
+
 <ion-modal  trigger="trigger-button" id="modal">
   <ng-template>
     <ion-content class="no-scroll bg-black">
-      <div class="modal-content-1">
-        <div class="continue-modal">
-          <ion-icon onclick="dismissModal()" (click)="continue()" id="trigger-button" name="play-circle-outline" color="light" class="continue"></ion-icon>
+      <div class="modal-content-1" (click)="continue()">
+          <ion-icon name="play-circle-outline" color="light"></ion-icon>
           Devam
+      </div>
+      <div class="modal-content-1" (click)="goToHome()">
+        <ion-icon name="home-outline" color="light"></ion-icon>
+        Anasayfa
+      </div>
+      <div class="team-scores flex-centered">
+        <div class="team" *ngFor="let team of teamSize">
+          <h3>Takım adı</h3>
+          <h5>Skor</h5>
         </div>
       </div>
     </ion-content>

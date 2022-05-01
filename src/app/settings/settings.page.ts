@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { SettingsService } from '../settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -9,17 +10,26 @@ import { Router } from '@angular/router';
 })
 export class SettingsPage implements OnInit {
 
-  constructor(private router: Router) { }
-  outputSeconds: number = 0;
+  subscription: Subscription;
+  outputSeconds: number = 90;
+  outputTeamSize: number = 2;
 
-  subject = new BehaviorSubject<number>(this.outputSeconds);
-
-  ngOnInit() {
+  public constructor(private settingsService: SettingsService, private router: Router) {
 
   }
 
-  sendTime(): Observable<number> {
-    return this.subject.asObservable();
+
+  sendTeamSize() {
+    this.settingsService.setTeamSize(this.outputTeamSize);
+  }
+
+  ngOnInit() {
+    this.settingsService.setTime(this.outputSeconds);
+  }
+
+  sendTime() {
+    this.settingsService.setTime(this.outputSeconds);
+    console.log(this.outputSeconds)
   }
 
   goToHomepage() {

@@ -3,21 +3,23 @@ import { Components } from '@ionic/core';
 import { words } from './words';
 import { Word } from './word';
 import { Subscription } from 'rxjs';
-import { SettingsPage } from '../settings/settings.page';
+import { SettingsService } from '../settings.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.page.html',
   styleUrls: ['./game.page.scss'],
-  providers: [SettingsPage]
+
 })
 export class GamePage implements OnInit {
   words: Word[] = this.shuffle(words);
   subscription: Subscription;
-  secs: number;
+  playTime: number = 90;
+  teamSize: any = 2;
 
-  constructor(private settings: SettingsPage) {
-    this.subscription = this.settings.sendTime().subscribe(value => this.secs = value);
+  constructor(private settingsService: SettingsService, private router: Router) {
+
    }
 
 
@@ -30,14 +32,25 @@ export class GamePage implements OnInit {
   first = words[this.index];
   second = words[this.index + 1];
   third = words[this.index + 2];
-  playTime = 120;
+
   remaining = '';
   isPaused = false;
 
 
+
+
+  goToHome() {
+    const content = document.querySelector('#content');
+    const modal = document.querySelector('#modal') as unknown as Components.IonModal;
+    content.classList.remove('blur');
+    modal.dismiss('cancel');
+    this.router.navigate(['/home']);
+  }
+
   ngOnInit() {
-    console.log(this.secs);
-    this.startTimer(30);
+    this.playTime = this.settingsService.getTime();
+    this.teamSize = this.settingsService.getTeamSize();
+    this.startTimer(this.playTime);
   }
 
   pauseTimer() {

@@ -1,7 +1,8 @@
 <ion-content class="no-scroll">
-  <ion-button (click)="goToHomepage()" color="primary">
-    hollo
-  </ion-button>
+
+  <ion-icon class="home" (click)="goToHomepage()" color="light" name="home-outline"></ion-icon>
+
+
     <ion-list>
       <div class="header-items">
 
@@ -29,7 +30,7 @@
       </ion-item>
       <ion-item>
 
-        <ion-range color="light" dualKnobs="true" min="2" max="4" step="1" [pin]="true" snaps="true"></ion-range>
+        <ion-range [(ngModel)]="outputTeamSize" (ionChange)="sendTeamSize()" color="light" dualKnobs="true" min="2" max="4" step="1" [pin]="true" snaps="true"></ion-range>
       </ion-item>
     </ion-list>
 

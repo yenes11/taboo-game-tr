@@ -123,10 +123,6 @@ ion-card-header {
   font-size: x-large;
 }
 
-.card-first {
-
-}
-
 
 .bg-black {
   --ion-background-color:black;
@@ -245,7 +241,7 @@ ion-chip ion-icon {
   margin-left: -10px;
 }
 
-.continue {
+.modal-content-1 ion-icon {
   font-size: 50px;
 }
 
@@ -260,7 +256,7 @@ ion-chip ion-icon {
 }
 
 .modal-content-1 {
-  border: 1px solid #FFFFFF;
+  margin-top: 3vh;
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -269,3 +265,18 @@ ion-chip ion-icon {
   text-align: center;
   color: #FFFFFF;
 }
+
+.team-scores {
+  margin-top: 30px;
+  flex-direction: column;
+  color: white;
+}
+
+
+.flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//create a diffrent class for centered flex
