@@ -1,12 +1,50 @@
-<ion-content [fullscreen]="true" class="no-scroll">
+<ion-content [fullscreen]="true" class="no-scroll" id="content-1">
   <div class="container">
     <ion-icon
       name="game-controller-outline"
       color="light"
       class="icon"
     ></ion-icon>
-    <ion-button (click)="startGame()" color="primary" class="btn-start">Başlat</ion-button>
-    <ion-button (click)="goToSettings()" color="primary" class="btn-settings">Ayarlar</ion-button>
-
+    <ion-button
+      (click)="startGame()"
+      id="trigger-button"
+      color="primary"
+      class="btn-start"
+      >Başlat</ion-button
+    >
+    <ion-button (click)="goToSettings()" color="primary" class="btn-settings"
+      >Ayarlar</ion-button
+    >
   </div>
 </ion-content>
+
+<ion-modal trigger="trigger-button" id="modal-1">
+  <ng-template>
+    <ion-content class="no-scroll bg-black">
+      <div class="flex-centered content-modal">
+        <h1>Oyun Süresi</h1>
+        <br>
+        <h2>{{ playTime }} Saniye</h2>
+        <br /><br />
+        <h1>Takımlar</h1>
+        <div class="team" *ngFor="let teamName of teamNames">
+          <br>
+          <h2>{{ teamName }}</h2>
+        </div>
+        <br><br>
+        <h1>Tur Sayısı</h1>
+        <br>
+        <h2>{{ rounds }}</h2>
+        <br>
+        <h1>Başlayan Takım</h1>
+        <br>
+        <h2>{{teamNames[0]}}</h2>
+<br><br>
+        <div (click)="goToGame()" class="start-button flex-centered">
+          <ion-icon name="play-outline" color="light"></ion-icon>
+          Başla
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

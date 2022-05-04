@@ -5,6 +5,8 @@ import { Word } from './word';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../settings.service';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-game',
@@ -17,27 +19,24 @@ export class GamePage implements OnInit {
   subscription: Subscription;
   playTime: number = 90;
   teamSize: any = 2;
-
-  constructor(private settingsService: SettingsService, private router: Router) {
-
-   }
-
-
-
+  teamNames;
+  scoresBoard = [];
   index = 0;
-
   secondCard = document.querySelector('#card-second');
   thirdCard = document.querySelector('#card-third');
-
   first = words[this.index];
   second = words[this.index + 1];
   third = words[this.index + 2];
-
   remaining = '';
   isPaused = false;
+  currentTeam: string;
+  indexTeam = 0;
+  rounds: number;
+  currentRound = 0;
 
+  constructor(private settingsService: SettingsService, private router: Router) {
 
-
+  }
 
   goToHome() {
     const content = document.querySelector('#content');
@@ -48,9 +47,23 @@ export class GamePage implements OnInit {
   }
 
   ngOnInit() {
-    this.playTime = this.settingsService.getTime();
+    this.currentRound = 0;
+    this.playTime = 5;
     this.teamSize = this.settingsService.getTeamSize();
+    this.teamNames = this.settingsService.getTeamNames();
+    this.rounds = 1;
+    this.currentTeam = this.teamNames[this.indexTeam];
     this.startTimer(this.playTime);
+    this.scoresBoard = [];
+    this.teamNames.forEach((team) => {
+      this.scoresBoard.push(
+        {
+          teamName: team,
+          score: 0
+        }
+      );
+    });
+    console.log(this.teamNames);
   }
 
   pauseTimer() {
@@ -67,32 +80,76 @@ export class GamePage implements OnInit {
     modal.dismiss('cancel');
   }
 
-  startTimer (seconds: number){
+  startTimer(seconds: number) {
     let minute: number = (seconds / 60) | 0;
     let second: number = (seconds % 60) | 0;
     let sMinute: string = '';
     let sSecond: string = '';
     this.remaining = `${minute}:${second}`;
     var recall = setInterval(() => {
-      if (!this.isPaused){
+      if (!this.isPaused) {
         seconds -= 1;
         minute = (seconds / 60) | 0;
         second = (seconds % 60) | 0;
         sMinute = minute < 10 ? `0${minute}` : `${minute}`;
         sSecond = second < 10 ? `0${second}` : `${second}`;
-        this.remaining =`${sMinute}:${sSecond}`;
-        if(minute == 0 && second == 0) {
+        this.remaining = `${sMinute}:${sSecond}`;
+        if (minute == 0 && second == 0) {
+          this.timeOver();
           clearInterval(recall);
         }
       }
     }, 1000);
-
   }
 
+  nextTeam() {
+    const modal = document.querySelector('#modal-end') as unknown as IonModal;
+    const content = document.querySelector('#content');
+    content.classList.remove('blur');
+    modal.dismiss();
+    this.startTimer(this.playTime);
+  }
 
+  timeOver() {
+    if (this.indexTeam + 1 == this.teamSize) {
+      this.currentRound++;
+      this.indexTeam = -1;
+    }
+    if (this.currentRound == this.rounds) {
+      const content = document.querySelector('#content');
+      const modal = document.querySelector("#modal-over") as unknown as IonModal;
+      content.classList.add('blur');
+      modal.present();
+    }
+    else {
+      console.log(this.indexTeam);
+      this.currentTeam = this.teamNames[++this.indexTeam];
+      const content = document.querySelector('#content');
+      const modal = document.querySelector("#modal-end") as unknown as IonModal;
+      content.classList.add('blur');
+      modal.present();
+    }
+  }
 
+  restart() {
+    const modal = document.querySelector('#modal-over') as unknown as IonModal;
+    const content = document.querySelector('#content');
+    content.classList.remove('blur');
+    modal.dismiss();
+    this.indexTeam = 0;
+    this.ngOnInit();
+  }
 
   clickTrue() {
+    //score handling
+    console.log(this.currentTeam);
+    let object = this.scoresBoard.find(x => x.teamName == this.currentTeam);
+    console.log(object);
+    let index = this.scoresBoard.indexOf(object);
+    object.score++;
+    this.scoresBoard[index] = object;
+
+    //card transition
     const firstCard = document.querySelector('.card-first');
     const secondCard = document.querySelector('.card-second');
     const thirdCard = document.querySelector('.card-third');
@@ -111,6 +168,13 @@ export class GamePage implements OnInit {
   }
 
   clickFalse() {
+    //score handling
+    let object = this.scoresBoard.find(x => x.teamName == this.currentTeam);
+    let index = this.scoresBoard.indexOf(object);
+    object.score--;
+    this.scoresBoard[index] = object;
+
+    //card transition
     const firstCard = document.querySelector('.card-first');
     const secondCard = document.querySelector('.card-second');
     const thirdCard = document.querySelector('.card-third');

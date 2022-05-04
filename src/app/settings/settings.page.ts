@@ -13,13 +13,32 @@ export class SettingsPage implements OnInit {
   subscription: Subscription;
   outputSeconds: number = 90;
   outputTeamSize: number = 2;
+  outputTeamNames = [];
+  outputRounds = 5;
 
   public constructor(private settingsService: SettingsService, private router: Router) {
 
   }
 
+  sendRounds() {
+    this.settingsService.setRounds(this.outputRounds);
+  }
+
+  sendTeamNames() {
+    this.outputTeamNames = []
+    const teams = document.querySelectorAll('#team-x') as NodeListOf<HTMLInputElement>;
+    teams.forEach(team => {
+      this.outputTeamNames.push(team.value);
+    });
+    this.settingsService.setTeamNames(this.outputTeamNames);
+  }
 
   sendTeamSize() {
+    const teams = document.querySelectorAll('#team-x') as NodeListOf<HTMLInputElement>;
+    teams.forEach(team => {
+      this.outputTeamNames.push(team.value);
+    });
+    this.settingsService.setTeamNames(this.outputTeamNames);
     this.settingsService.setTeamSize(this.outputTeamSize);
   }
 
@@ -29,7 +48,6 @@ export class SettingsPage implements OnInit {
 
   sendTime() {
     this.settingsService.setTime(this.outputSeconds);
-    console.log(this.outputSeconds)
   }
 
   goToHomepage() {

@@ -266,7 +266,7 @@ ion-chip ion-icon {
   color: #FFFFFF;
 }
 
-.team-scores {
+.team-scores, .team-scores div {
   margin-top: 30px;
   flex-direction: column;
   color: white;
@@ -279,4 +279,3 @@ ion-chip ion-icon {
   align-items: center;
 }
 
-//create a diffrent class for centered flex

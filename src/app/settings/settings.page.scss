@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
 
 
-
 ion-content{
-  --ion-background-color:#011627;
+  --ion-background-color: #011627;
   --ion-width: 100%;
   --ion-height: 100%;
 }
@@ -15,6 +14,11 @@ ion-content{
 //     width: 100%;
 //     text-align: center;
 // }
+
+.flex-row {
+  flex-direction: row;
+}
+
 
 .header-items {
 
@@ -58,4 +62,8 @@ ion-icon {
 .home {
   margin-top: 20px;
   margin-left: 20px;
+}
+
+.team-names ion-item {
+  color: white;
 }

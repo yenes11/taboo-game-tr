@@ -4,34 +4,58 @@
 
 
     <ion-list>
+      <ion-item>
       <div class="header-items">
 
-          <!-- <ion-icon name="hourglass-outline" color="light"></ion-icon> -->
-          <ion-chip
-          color="light"
-          outline="true"
-        >
-        <ion-icon name="hourglass-outline" color="light"></ion-icon>
-        <div class="label">Süre</div>
-        </ion-chip>
-          <!-- <div class="label">Süre</div> -->
+        <div class="header-items">
+          <ion-icon name="hourglass-outline" color="light"></ion-icon>
+          <div class="label">Süre</div>
         </div>
+        </div>
+      </ion-item>
 
 
-      <ion-item>
+      <ion-item style="color:white; font-size: 20px;">
 
         <ion-range [(ngModel)]="outputSeconds" (ionChange)="sendTime()" color="light" min="30" max="180" step="15" [pin]="true" ></ion-range>
+        {{outputSeconds}}
       </ion-item>
+      <ion-item>
+        <div class="header-items">
+
+          <div class="header-items">
+            <ion-icon name="reload-outline" color="light"></ion-icon>
+            <div class="label">Tur</div>
+          </div>
+          </div>
+        </ion-item>
+        <ion-item style="color:white; font-size: 20px;">
+
+          <ion-range [(ngModel)]="outputRounds" (ionChange)="sendRounds()" color="light" min="2" max="20" step="1" [pin]="true" ></ion-range>
+          {{outputRounds}}
+        </ion-item>
+
       <ion-item>
         <div class="header-items">
         <ion-icon name="people-outline" color="light"></ion-icon>
         <div class="label">Takım Sayısı</div>
       </div>
       </ion-item>
-      <ion-item>
+      <ion-item style="color:white; font-size: 20px;">
 
-        <ion-range [(ngModel)]="outputTeamSize" (ionChange)="sendTeamSize()" color="light" dualKnobs="true" min="2" max="4" step="1" [pin]="true" snaps="true"></ion-range>
+        <ion-range [(ngModel)]="outputTeamSize" (ionChange)="sendTeamSize()" color="light" min="2" max="4" step="1" [pin]="true"></ion-range>
+        {{outputTeamSize}}
       </ion-item>
+      <div class="team-names">
+        <ion-item *ngFor="let t of [].constructor(outputTeamSize); index as i">
+          <ion-icon name="people-outline" color="light"></ion-icon> &nbsp; &nbsp; &nbsp;
+          <ion-input (ionChange)="sendTeamNames()" id="team-x" value="Takım-{{i}}"></ion-input>
+      </ion-item>
+      </div>
+
     </ion-list>
 
+
 </ion-content>
+
+

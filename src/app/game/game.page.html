@@ -61,7 +61,7 @@
       name="pause-circle-outline"
       color="light"
       class="icon-stop"
-      id="trigger-button"
+      id="trigger-button-1"
     ></ion-icon>
     <ion-icon
       name="stopwatch-outline"
@@ -88,7 +88,7 @@
 
 </ion-content>
 
-<ion-modal  trigger="trigger-button" id="modal">
+<ion-modal  trigger="trigger-button-1" id="modal">
   <ng-template>
     <ion-content class="no-scroll bg-black">
       <div class="modal-content-1" (click)="continue()">
@@ -100,9 +100,80 @@
         Anasayfa
       </div>
       <div class="team-scores flex-centered">
-        <div class="team" *ngFor="let team of teamSize">
-          <h3>Takım adı</h3>
-          <h5>Skor</h5>
+        <div style="font-size:35px;">
+          Skor Tablosu
+        </div>
+
+        <div class="team flex-centered" *ngFor="let team of scoresBoard">
+          <h1>{{ team.teamName }}</h1>
+          <h1>{{ team.score }}</h1>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal id="modal-end">
+  <ng-template>
+    <ion-content class="no-scroll bg-black">
+      <div class="modal-content-1" (click)="goToHome()">
+        <ion-icon name="home-outline" color="light"></ion-icon>
+        Anasayfa
+      </div>
+
+      <div class="modal-content-1" (click)="nextTeam()">
+          <ion-icon name="play-circle-outline" color="light"></ion-icon>
+          Hazır!
+      </div>
+      <div class="team-scores flex-centered">
+        <div style="font-size:35px;">
+          Sıradaki Takım
+        </div>
+        <h1>{{ teamNames[indexTeam] }}</h1>
+        <div style="font-size:35px;">
+          Skor Tablosu
+        </div>
+
+        <div class="team flex-centered" *ngFor="let team of scoresBoard">
+          <h1>{{ team.teamName }}</h1>
+          <h1>{{ team.score }}</h1>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal id="modal-over">
+  <ng-template>
+    <ion-content class="no-scroll bg-black">
+      <div class="modal-content-1" (click)="goToHome()">
+        <ion-icon name="home-outline" color="light"></ion-icon>
+        Anasayfa
+      </div>
+
+      <div class="modal-content-1" (click)="restart()">
+          <ion-icon name="reload-outline" color="light"></ion-icon>
+          Yeniden Oyna
+      </div>
+
+      <div class="modal-content-1">
+        <ion-icon name="trophy-outline" color="light"></ion-icon>
+        <h1>Kazanan</h1>
+      </div>
+
+      <div class="team-scores flex-centered">
+        <div style="font-size:35px;">
+          Başlacak Takım
+        </div>
+        <h1>{{ teamNames[0] }}</h1>
+        <div style="font-size:35px;">
+          Skor Tablosu
+        </div>
+        <div class="team flex-centered" *ngFor="let team of scoresBoard">
+          <h1>{{ team.teamName }}</h1>
+          <h1>{{ team.score }}</h1>
         </div>
       </div>
     </ion-content>
